@@ -1,0 +1,32 @@
+h1{
+    font-size: 1.75em;
+    font-weight: 600;
+}
+
+h2{
+    font-size: 1.45em;
+    font-weight: 600;
+}
+
+h3{
+      font-size: 1.2em;
+    font-weight: 600;  
+}
+
+//Sections
+.heading{
+    &-row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &-section{
+        margin: abs($px*2) 0px;
+    }
+}
+
+.text{
+    &-success{
+        color: $blue-100;
+    }
+}

@@ -1,0 +1,40 @@
+//Colors
+$white: rgba(255,255,255,1);
+$black: rgba(0,0,0,1);
+$dark: rgba(20,20,20,1);
+$grey: rgba(189,189,189,1);
+$grey-80: rgba(145,145,145,1);
+
+$red-100: rgba(219,27,72,1);
+$red-80: rgba(219,27,72,0.8);
+$red-60: rgba(219,27,72,0.6);
+
+$blue-100: rgba(0,133,195,1);
+$blue-80: rgba(0,133,195,0.8);
+$blue-60: rgba(0,133,195,0.6);
+
+$green-100: rgba(102,210,75,1);
+$green-80: rgba(102,210,75,.8);
+$green-60: rgba(102,210,75,.6);
+
+$yellow-100: rgba(252,211,66,1);
+$yellow-80: rgba(252,211,66,.8);
+$yellow-60: rgba(252,211,66,.6);
+
+// Images
+$logo-regular: url('../img/logo.svg');
+
+// Icons
+
+// Measurements
+$shadow: 0px 6px 8px rgba(0,0,0,.5);
+
+$px: 8px;
+$px_2: abs($px*2);
+$font: 'TT Commons';
+// breakpoints
+$breakpoint-small: "only screen and (min-width: 20em)";
+$breakpoint-medium: "only screen and (min-width: 30em)";
+// Grid variables
+$grid-columns: 12;
+$grid-max-width: 80em;

@@ -1,0 +1,44 @@
+.footer{
+    background-color: $white;
+    border-top: 1px solid $grey;
+    padding: abs($px*4) 0px;
+    margin-top: abs($px*4);
+    &-logo{
+        background-image: $logo-regular;
+        height: 28px;
+        width: 123px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &-list{
+        &-header{
+            font-size: 1.4em;
+            font-weight: 600;
+            color: $dark;
+        }
+        &-wrapper{
+            list-style: none;
+            margin-top: abs($px*3);
+        }
+        &-item{
+            margin: abs($px*2) 0px;
+            font-size: 1.2em;
+            font-weight: 400;
+            cursor: pointer;
+            &-icon{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: abs($px*2) 0px;
+                font-size: 1.2em;
+                font-weight: 400;
+                cursor: pointer;
+                .unicon{
+                    fill: $dark;
+                    margin-right: $px;
+                }
+            }
+        }
+
+    }
+}

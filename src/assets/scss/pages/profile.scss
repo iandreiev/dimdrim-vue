@@ -1,0 +1,35 @@
+.profile{
+    &-header{
+        margin: abs($px*2) 0px;
+        padding-bottom: abs($px*2);
+        border-bottom: 1px solid $grey;
+    }
+    &-wrapper{
+        display: flex;
+        flex-direction: row;
+    }
+    &-sidebar{
+            .sidebar-item{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: $px 0px;
+                cursor: pointer;
+                p{
+                    margin-left: $px;
+                    font-weight: 400;
+                }
+                &--active{
+                    .unicon{
+                        fill: $blue-100;
+                        @include transition;
+                    }
+                    p{
+                        font-weight: 500;
+                        margin-left: $px;
+                    }
+                }
+            }
+    }
+    &-content{}
+}

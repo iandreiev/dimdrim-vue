@@ -1,0 +1,71 @@
+imput[type="submit"], button{
+    font-family: $font;
+    font-weight: 500;
+}
+
+.btn{
+    display: block;
+    padding: abs($px*2);
+    border-radius: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    @include transition;
+    &-delete{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        @include transition;
+        .unicon{
+            fill: $red-80;
+        }
+        p{
+            font-size: 1.2em;
+            color: $red-80;
+        }
+        &:hover{
+        @include transition;
+
+            .unicon{
+                fill: $red-100;
+            }
+            p{
+                font-size: 1.2em;
+                color: $red-100;
+            }
+        }
+    }
+    &:focus{
+        outline: none;
+    }
+    &-float{}
+    &-regular{
+
+    }
+    &-block{
+        width: 100%;
+    }
+    //color scheme
+    &-accent{
+        background-color: $blue-100;
+        color: $white;
+        &:hover{
+            background-color: darken($blue-100, 5%);    
+        }
+    }
+    &-white{
+        background-color: $white;
+        color: $blue-100;
+        &:hover{
+            background-color: darken($white, 5%);    
+        }
+    }
+    &-success{
+        background-color: $green-100;
+        color: $white;
+        &:hover{
+            background-color: darken($green-100, 5%);    
+        }
+    }
+}

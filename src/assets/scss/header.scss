@@ -1,0 +1,40 @@
+.header{
+    width: 100%;
+    padding: abs($px*3) 0px;
+    border-bottom: 1px solid $grey;
+    &-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-logo{
+        background-image: $logo-regular;
+        height: 28px;
+        width: 123px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &-nav{
+        ul{
+            display: flex;
+            flex-direction: row;
+            li{
+                margin-right: abs($px*3);
+                font-size: abs($px*2.3);
+                font-weight: 500;
+            }
+        }
+    }
+    &-actions{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        &--item{
+            margin: 0px $px;
+            &:last-child{
+                margin-right: 0px;
+            }
+        }
+    }
+}

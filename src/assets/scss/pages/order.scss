@@ -1,0 +1,103 @@
+.order{
+    &-page{
+        padding-top: 20px;
+    }
+    &-cart{
+        margin-bottom: abs($px*2);
+    }
+    &-qty{
+        &-controller{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            input{
+                width: 100px;
+                max-width: 100px;
+            }
+            .btn{
+                &-mini{
+                    padding: abs($px*2-2);
+                }
+                &-minus{
+                    .unicon{
+                        fill: $dark;
+                    }
+                }
+                &-plus{
+                    .unicon{
+                        fill: $dark;
+                    }
+                }
+            }
+        }
+    }
+    &-forms{
+        margin-right: abs($px*2);
+        input[type=text],
+        input[type=password]{
+            margin: $px 0px;
+            padding: abs($px*2);
+        }
+        
+    }
+    &-wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    &-item{
+        display: flex;
+        flex-direction: row;
+        margin: abs($px*2) 0px;
+        align-items: center;
+        justify-content: space-between;
+        &-product{
+            display: flex;
+            flex-direction: row;
+        }
+        .image{
+            width: 80px;
+            height: 80px;
+            border: 1px solid $grey;
+        }
+        &-result{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            .qty{
+                font-size: 1.2em;
+                font-weight: 500;
+                color: $dark;
+                margin-bottom: $px;
+            }
+            .total{
+                font-size: 1.4em;
+                font-weight: 600;
+                color: $dark;
+            }
+        }
+        &-meta{
+            display: flex;
+            flex-direction: column;
+            margin-left: $px;
+            // max-width: 340px;
+            // min-width: 167px;
+            [class^="qty-field-"], [class*=" qty-field-"]{
+                width: 200px;
+            }
+            .title{
+                font-size: 1.4em;
+                font-weight: 600;
+                color: $dark;
+                margin-bottom: $px;
+            }
+            .price-wrapper{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .price{
+                    &-old{}
+                }
+            }
+        }
+    }
+}

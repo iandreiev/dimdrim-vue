@@ -1,0 +1,58 @@
+input[type="text"],
+textarea,
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="url"] {
+    border-radius: none;
+    padding: abs($px * 2);
+    font-size: 1.4em;
+    font-family: $font;
+    width: 100%;
+    @include transition;
+    border: 1px solid $grey;
+    &:focus {
+        outline: none;
+        border: 1px solid $blue-100;
+        color: $dark;
+    }
+}
+
+.search {
+    input[type="text"] {
+        margin-right: abs($px * 2);
+    }
+    button {
+        width: 200px;
+    }
+}
+
+.form {
+    &-controller {
+        label{
+            font-weight: 500;
+            font-size: 1.4em;
+
+        }
+        input[type="text"],
+        textarea,
+        input[type="password"],
+        input[type="number"],
+        input[type="email"],
+        input[type="url"] {
+            border-radius: none;
+            padding: abs($px * 2);
+            font-size: 1.4em;
+            font-family: $font;
+            width: 100%;
+            @include transition;
+            border: 1px solid $grey;
+            &:focus {
+                outline: none;
+                border: 1px solid $blue-100;
+                color: $dark;
+            }
+        }
+        margin: abs($px*2) 0px;
+    }
+}
