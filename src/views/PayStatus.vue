@@ -1,15 +1,27 @@
 <template>
   <RegularPage :pageName="'paycheck'">
-      {{status}}
+      <!-- {{status}} -->
 
         <div class="checkout-page">
-            <div class="status-error" v-if="status.status == 'error'">
-                <h2>{{status.err_description}}</h2>
-                <button @click="stopInterval()">Stop Interval</button>
+
+            <div class="status" v-if="status.status == 'error'">
+                <div class="icon icon-await"></div>
+                <h2 class="status-title">Очікуємо на оплату</h2>
             </div>
 
-            <div class="status-success" v-if="status.status == 'success'">
-                <h2>{{status.status}}</h2>
+                        <div class="status" v-if="status.status == 'p24_verify'">
+                <div class="icon icon-await"></div>
+                <h2 class="status-title">Очікуємо на оплату</h2>
+            </div>
+
+
+            <div class="status" v-if="status.status == 'success'">
+                <div class="icon icon-success"></div>
+                <h2 class="status-title">Замовлення №{{status.order_id}} успішно оформлено.</h2>
+                <div class="btn-row">
+                     <button-regular @click="toRouter({name: 'Home'})" :btnClass="'btn-accent'">Повернутись на головну</button-regular>
+                <button-regular @click="toRouter({name: 'UserOrders'})" :btnClass="'btn-accent'">В замовлення</button-regular>
+                </div>
             </div>
         </div>
 
@@ -20,6 +32,7 @@
 <script>
 import { mapState } from 'vuex'
 import RegularPage from "../components/pages/regular"
+import ButtonRegular from "../components/ui/buttons/button-regular.vue"
 export default {
     data(){
         return{
@@ -31,9 +44,12 @@ export default {
         }
     },
     computed:{
-        ...mapState(["cartdata"])
+        ...mapState(["cartdata", "user"])
     },
     methods:{
+        toRouter(params){
+            this.$router.push(params)
+        },
         stopInterval(){
             clearInterval(this.intervalGetPayData)
             console.log('stop interval')
@@ -59,7 +75,8 @@ export default {
                     customer_id: this.cartdata.customer_id,
                     order_type: 'paid',
                     value: this.status.amount,
-                    is_registered: true
+                    is_registered: true,
+                    created_at: new Date().getTime()
                 }
             }
 
@@ -70,15 +87,15 @@ export default {
             if(this.status.status == 'success'){
                 clearInterval(this.intervalGetPayData)
                 this.saveOrder()
-                console.log('stopped')
-            }
+                this.$store.commit('emptyCart')
+}
         }
     },
     mounted(){
         this.getStatus()
     },
     components:{
-        RegularPage
+        RegularPage, ButtonRegular
     }
 }
 

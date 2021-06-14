@@ -38,3 +38,28 @@
     width: 100%;
     // https://codepen.io/pieter-biesemans/pen/BQBWXX
 }
+
+@media #{$bp-regular}{
+    .slide{
+        &-test{
+            .img{
+                display: none;
+            }
+            .col-6:last-child{
+                display: none;
+            }
+        }
+    }
+}
+@media #{$bp-x}{
+    .slide{
+        &-test{
+            .img{
+                display: none;
+            }
+            .col-6:last-child{
+                display: none;
+            }
+        }
+    }
+}

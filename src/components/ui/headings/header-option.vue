@@ -1,7 +1,7 @@
 <template>
   <div class="heading-row">
       <h1>{{title}}</h1>
-      <router-link v-show="link != 0" :to="{name: link}">{{linkTitle}}</router-link>
+      <router-link class="router-link" v-show="link != 0" :to="{name: link}">{{linkTitle}}</router-link>
   </div>
 </template>
 

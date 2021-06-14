@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-popup cart-popup-cart" :class="{'cart-popup-active':cartShow==true}" v-if="cartShow == true">
+  <div v-click-outside="closeCart" class="cart-popup cart-popup-cart" :class="{'cart-popup-active':cartShow==true}" v-if="cartShow == true">
       <div class="cart-header">
           <h3>Кошик</h3>
           <div class="cart-close" @click="closeCart()">
@@ -19,7 +19,7 @@
                   <div class="title">{{i.title}}</div>
                   <div class="price-wrapper">
                       <div class="price">
-                          {{i.price}} грн.
+                          {{i.totalPrice}} грн.
                       </div>
                   </div>
               </div>

@@ -13,7 +13,7 @@ $blue-100: rgba(0,133,195,1);
 $blue-80: rgba(0,133,195,0.8);
 $blue-60: rgba(0,133,195,0.6);
 
-$green-100: rgba(102,210,75,1);
+$green-100: #679436;
 $green-80: rgba(102,210,75,.8);
 $green-60: rgba(102,210,75,.6);
 
@@ -23,11 +23,17 @@ $yellow-60: rgba(252,211,66,.6);
 
 // Images
 $logo-regular: url('../img/logo.svg');
+$icon-success: url('../img/confirm.png');
+$icon-loading: url('../img/loading.png');
+$icon-cart: url('../img/cart.svg');
+$icon-heart: url('../img/heart.svg');
+$icon-truck: url('../img/delivery.svg');
+$icon-notif: url('../img/notif.svg');
 
 // Icons
 
 // Measurements
-$shadow: 0px 6px 8px rgba(0,0,0,.5);
+$shadow: 0px 6px 8px rgba(0, 0, 0, 0.267);
 
 $px: 8px;
 $px_2: abs($px*2);
@@ -35,6 +41,10 @@ $font: 'TT Commons';
 // breakpoints
 $breakpoint-small: "only screen and (min-width: 20em)";
 $breakpoint-medium: "only screen and (min-width: 30em)";
+$bp-ios-min: "only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2)";
+$bp-ios-max: "only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3)";
+$bp-x: "only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3)";
+$bp-regular: "only screen and (min-device-width:360px) and (max-device-width:736px)";
 // Grid variables
 $grid-columns: 12;
 $grid-max-width: 80em;

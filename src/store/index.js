@@ -7,10 +7,11 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex)
 Vue.use(VueAxios, axios);
 
-const PORT = 5000
+const PORT = 5050
 const mode = 'dev' // can be 'product'
+const IP = "192.168.88.37"
 
-let url = mode == 'dev' ? `http://localhost:${PORT}/api` : ''
+let url = mode == 'dev' ? `http://${IP}:${PORT}/api` : ''
 
 Vue.axios.defaults.baseURL = url
 Vue.use(Vuex)
@@ -22,7 +23,9 @@ let favsCount = window.localStorage.getItem('favsCount');
 
 export default new Vuex.Store({
   state: {
+    orders: [],
     categories:[],
+    order_history:[],
     cartdata:'',
     partners:[],
     cartShow: false,
@@ -32,9 +35,36 @@ export default new Vuex.Store({
     favsCount: favsCount ? parseInt(favsCount) : 0,
     favs: favs ? JSON.parse(favs) : [],
     user:{},
-    auth: false
+    ip: {},
+    auth: false,
+    notifications: []
   },
   mutations: {
+    LOGOUT:(state)=>{
+      state.orders = [],
+      state.categories = [],
+      state.order_history = [],
+      state.cartdata = '',
+      state.partners = [],
+      state.cartShow = false,
+      state.favsShow = false,
+      state.cart = cart ? JSON.parse(cart) : [],
+      state.cartCount = cartCount ? parseInt(cartCount) : 0,
+      state.favsCount = favsCount ? parseInt(favsCount) : 0,
+      state.favs = favs ? JSON.parse(favs) : [],
+      state.user = {},
+      state.auth = false,
+      state.notifications = []
+    },
+    SET_USER_NOTIFICATIONS:(state,notifications)=>{
+      state.notifications = notifications
+    },
+    SET_ORDERS_HISTORY:(state,orders)=>{
+      state.order_history = orders
+    },
+    SET_ORDERS:(state,orders)=>{
+      state.orders = orders
+    },
     SAVE_CARTDATA:(state,cartdata)=>{
       state.cartdata = cartdata
     },
@@ -47,6 +77,9 @@ export default new Vuex.Store({
     },
     SET_PARTNERS:(state,partners)=>{
       state.partners = partners
+    },
+    SET_IP:(state,ip)=>{
+      state.ip = ip
     },
     SHOW_CART:(state,cartShow)=>{
       state.cartShow = cartShow
@@ -69,18 +102,17 @@ export default new Vuex.Store({
     emptyFavs(state){
       state.favs = []
       state.favsCount = 0
-
     },
     addToFavs(state,item){
       let found = state.cart.find(product => product._id == item._id);
 
       if (found) {
         found.qty++;
-        found.totalPrice = found.qty * found.price;
+        found.totalPrice = found.qty * parseInt(found.price[0].price);
       } else {
         state.favs.push(item);
         Vue.set(item, 'qty', 1);
-        Vue.set(item, 'totalPrice', item.price);
+        Vue.set(item, 'totalPrice', parseInt(item.prices[0].price));
       }
 
       state.favsCount++;
@@ -90,11 +122,11 @@ export default new Vuex.Store({
 
       if (found) {
         found.qty++;
-        found.totalPrice = found.qty * found.price;
+        found.totalPrice = found.qty * parseInt(found.price[0].price);
       } else {
         state.cart.push(item);
         Vue.set(item, 'qty', 1);
-        Vue.set(item, 'totalPrice', item.price);
+        Vue.set(item, 'totalPrice', parseInt(item.prices[0].price));
       }
 
       state.cartCount++;
@@ -106,11 +138,11 @@ export default new Vuex.Store({
 
       if (found) {
         found.qty--;
-        found.totalPrice = found.qty * found.price;
+        found.totalPrice = found.qty * parseInt(found.price[0].price);
       } else {
         state.cart.push(item);
         Vue.set(item, 'qty', 1);
-        Vue.set(item, 'totalPrice', item.price);
+        Vue.set(item, 'totalPrice', parseInt(found.price[0].price));
       }
 
       state.cartCount--;
@@ -148,9 +180,48 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    GET_IP:({commit})=>{
+      let query = {
+        url: 'https://ipinfo.io/?token=ae4719bcd65f8b',
+        method:'get'
+      }
+
+      axios(query)
+      .then(res=>commit('SET_IP',res.data))
+    },
+    GO_LOGOUT:({commit})=>{
+      commit('LOGOUT')
+    },
+    newQuery:({commit}, params) => {
+      let query = {
+        url: params.query_params != '' ? url + params.endpoint + params.query_params : url + params.endpoint,
+        method: params.method,
+        headers: params.headers != {} ? params.headers : undefined,
+        data: params.data != {} ? params.data : undefined
+      }
+      axios(query)
+      .then(res=>{
+        console.log(res)
+        commit(params.commit, res.data)
+      })
+      .catch(err=>console.log(err))
+    }
+
   },
   modules: {
   },
   plugins: [createPersistedState()]
 
 })
+
+
+/*
+  newQuery Method:
+      params: 
+        query_params: string,
+        endpoint: string,
+        data: object,
+        headers: object,
+        commit: string
+
+*/

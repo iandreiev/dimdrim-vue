@@ -2,7 +2,8 @@
   <div id="auth-page">
        <Navbar />
       <SectionMain>
-        <div class="row">
+
+        <div class="row auth-container" v-if="loading.auth == false">
           <div class="col-4 mx-a">
             <h1>Авторизація</h1>
       <Input v-model="login.email" placeholder="E-mail" :isLabel="true" :label="'E-mail'" :name="'email'" :type="'text'" />
@@ -15,8 +16,8 @@
       <p v-if="Object.keys(status.msg).length > 0">{{status.msg}}</p>
 
        </div>
-
         </div>
+      <state-loading :text="'Триває авторизація'" v-else />
       </SectionMain>
        <Footer />
 
@@ -31,9 +32,16 @@ import Input from "../components/ui/inputs/input-text"
 import ButtonRegular from "../components/ui/buttons/button-regular"
 import SectionHeading from "../components/ui/sections/heading-section"
 import SectionMain from "../components/ui/sections/main-section"
+import StateLoading from "../components/ui/state/state-loading.vue"
+import getDevice from "../store/getDevice"
+import {mapState} from "vuex"
+
 export default {
   data(){
     return{
+      loading:{
+        auth:false
+      },
       login:{
         email:'',
         password:''
@@ -46,11 +54,31 @@ export default {
       status:{
         error:false,
         msg:''
+      },
+      last_login:{
+        device: '',
+        ip: '',
+        logged_at: new Date().getTime()
       }
     }
   },
   methods:{
+    getDeviceBrowser(){
+      let browser = navigator.userAgent
+      this.$store.dispatch('GET_IP')
+
+      this.last_login = {
+        device: browser,
+        ip: this.ip.ip,
+        last_location: this.ip.city,
+        logged_at: new Date().getTime()
+      }
+      return
+      
+    },
     loginBtn(){
+      this.loading.auth = true
+
       let options = {
         url: 'auth/login',
         method: 'post',
@@ -60,7 +88,25 @@ export default {
       this.$http(options)
       .then(res=>{
         this.$store.commit('SAVE_USER', res.data)
-        this.$router.push({name: 'UserOrders'})
+        
+        setTimeout(()=>{
+                  if(this.auth == true){
+                          let setLogin = {
+        url: 'users/setLastLogin/'+this.user.user.id,
+        method:'patch',
+        data: this.last_login,
+        headers:{
+          Authorization: this.user.token
+        }
+      }
+          this.$http(setLogin)
+          .then(res=>{
+            console.log(res.data)
+            this.loading.auth = false
+            this.$router.push({name: 'UserOrders'})
+          })
+        }
+        }, 1500)
         })
       .catch(e=>alert(e))
     },
@@ -73,7 +119,8 @@ export default {
           midname: this.register.midname,
           email: this.login.email,
           password: this.login.password,
-          type: 'default_user'
+          type: 'default_user',
+          last_login: this.last_login
         }
       }
 
@@ -94,8 +141,14 @@ export default {
         }, 3000)
       })
       .catch(e=>alert(e))
-    }
+    },
   },
+      computed:{
+      ...mapState(["ip","user", "auth"])
+    },
+    mounted(){
+      this.getDeviceBrowser()
+    },
   components:{
         Navbar,
     Footer,
@@ -104,6 +157,7 @@ export default {
     ButtonRegular,
     SectionHeading,
     SectionMain,
+    StateLoading
   }
 }
 </script>

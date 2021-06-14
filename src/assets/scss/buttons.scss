@@ -1,16 +1,26 @@
-imput[type="submit"], button{
+input[type="submit"], button{
     font-family: $font;
     font-weight: 500;
 }
 
 .btn{
     display: block;
-    padding: abs($px*2);
+    padding: abs($px*2) 24px;
     border-radius: none;
     border: none;
     font-size: 1.2em;
     cursor: pointer;
     @include transition;
+    &-pillow{
+        width: 100%;
+        display: none;
+        padding: abs($px*1.5);
+        font-size: 18px;
+    }
+    .unicon{
+        display: flex;
+        fill: $white;
+    }
     &-delete{
         display: flex;
         flex-direction: row;
@@ -39,7 +49,45 @@ imput[type="submit"], button{
     &:focus{
         outline: none;
     }
-    &-float{}
+    &-float{
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        @include transition;
+        &:focus{
+            outline: none;
+        }
+        &-group{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            @include transition;
+            .btn-float{
+                margin: abs($px*2);
+            }
+        }
+        &.default{
+            background-color: $white;
+            &:hover{
+                background-color: $dark;
+                .unicon{
+                    fill: $white;
+                }
+            }
+            .unicon{
+                fill: $dark;
+            }  
+        }
+        &.shadow{
+            box-shadow: $shadow;
+        }
+    }
     &-regular{
 
     }
@@ -69,3 +117,25 @@ imput[type="submit"], button{
         }
     }
 }
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 2s
+ }
+ .fade-enter, .fade-leave-to /* .fade-leave-active в версии ниже 2.1.8 */ {
+    opacity: 0
+ }
+
+ @media #{$bp-x}{
+     .btn{
+         &-pillow{
+             display: flex;
+         }
+     }
+ }
+ @media #{$bp-regular}{
+     .btn{
+         &-pillow{
+             display: flex;
+         }
+     }
+ }

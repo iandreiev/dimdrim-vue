@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import GetLocation from "./store/getLocation"
+
 export default {
   data(){
     return{
@@ -33,7 +35,8 @@ export default {
   created(){
     this.getCats()
     this.getPartners()
-  }
+    GetLocation.getLocationAPI()
+  },
 }
 </script>
 

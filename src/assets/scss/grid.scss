@@ -43,6 +43,11 @@ img {
         flex-direction: row;
         width: 100%;
         // flex-wrap: wrap;
+        &-scroll{
+            &--horizontal{
+
+            }
+        }
         &-center{
             justify-content: center;
         }
@@ -82,3 +87,66 @@ img {
 .mx-a{
     margin: 0 auto;
 }
+
+
+// test
+
+$gutter: 20px;
+  
+  .row-scroll {
+    padding: 0;
+    display: grid;
+    grid-gap: $gutter 0;
+    grid-template-columns: $gutter 1fr $gutter;
+    align-content: start;
+
+    
+  }
+  
+  .row-scroll > * {
+    grid-column: 2 / -2;
+  }
+  
+  .row-scroll > .full {
+    grid-column: 1 / -1;
+  }
+  
+  .hs {
+    display: grid;
+    grid-gap: calc($gutter / 2);
+    grid-template-columns: 10px;
+    grid-template-rows: minmax(150px, 1fr);
+    grid-auto-flow: column;
+    grid-auto-columns: calc(50% - $gutter * 2);
+  
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    padding-bottom: calc(.75 * $gutter);
+    margin-bottom: calc(-.25 * $gutter);
+    &::-webkit-scrollbar-track{
+        background-color: $white;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: $dark;
+        border: 4px;
+        cursor: grab;
+    }
+  }
+  
+  .hs:before,
+  .hs:after {
+    content: '';
+    width: 10px;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .unicon{
+      display: flex!important;
+  }

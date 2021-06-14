@@ -1,0 +1,34 @@
+.label{
+    padding: $px;
+    font-size: 1.2em;
+    font-weight: 400;
+    max-width: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: $px;
+    &:last-child{
+        margin-right: 0;
+    }
+    &-info{
+        background-color: $blue-100;
+        color: $white;
+    }
+    &-warning{
+        background-color: $yellow-100;
+        color: $dark;
+    }
+    &-danger{
+        background-color: $red-100;
+        color: $white;
+    }
+    &-success{
+        background-color: $green-100;
+        color: $white;
+    }
+    &-lazy{
+        background: $white;
+        color: $white;
+    }
+}

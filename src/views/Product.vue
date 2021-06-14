@@ -20,8 +20,8 @@
               </div>
               <div class="product-item product-item--prices">
                  <div class="price-row">
-                      <h2>{{product.price}}</h2>
-                  <p>грн. / 1 {{currentSize(product.sizes[0])}}</p>
+                      <h2>{{product.prices[0].price}}</h2>
+                  <p>{{product.prices[0].currency}} / 1 </p>
                  </div>
               </div>
               <div class="product-item product-item--quantity">
@@ -43,6 +43,10 @@
               </div>
           </div>
       </div>
+      <h1>З цими товарами купують</h1>
+       <scroll-horizontal :settings="catOptions">
+      <ProductCard v-for="(i,index) in products" :key="index" :product="i" />
+    </scroll-horizontal>
       </SectionMain>
        <Footer />
   </div>
@@ -58,18 +62,47 @@ import SectionHeading from "../components/ui/sections/heading-section"
 import SectionMain from "../components/ui/sections/main-section"
 import ProductCard from "../components/ui/cards/product-card"
 import SectionScrollHorizontal from "../components/ui/slider/slider-horizontal"
+import ScrollHorizontal from '../components/ui/scroll/scroll-horizontal.vue'
 
 export default {
     data(){
         return{
-            product:'',
+            product:{},
             sizes: '',
+            products:[],
             buy:{
                 quantity:''
+            },
+            catOptions:{
+                col:12,
+        scrollbar: true
             }
         }
     },
     methods:{
+        getCats(){
+            let cats = this.product.categories
+
+            cats.forEach(i=>{
+                this.loadProductsByCategory(i)
+            })
+        },
+        loadProductsByCategory(category){
+            let options = {
+                url: '/shop/category/alias/'+category,
+                method:'get'
+            }
+
+            console.log('init category', category)
+
+            this.$http(options)
+            .then(res=>{
+                console.log(res)
+                this.products = res.data
+                
+                })
+            .catch(e=>console.log(e))
+        },
         loadProduct(){
             let options = {
                 url: `shop/${this.$route.params.id}`,
@@ -102,6 +135,13 @@ export default {
     },
     mounted(){
         this.loadProduct()
+        
+            setTimeout(()=>{
+            this.getCats()
+            // this.loadProductsByCategory()
+
+            },500)
+
         this.loadSizes()
     },
     components:{
@@ -113,7 +153,8 @@ export default {
     SectionHeading,
     SectionMain,
     ProductCard,
-    SectionScrollHorizontal
+    SectionScrollHorizontal,
+    ScrollHorizontal
   }
 }
 </script>

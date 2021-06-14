@@ -27,6 +27,16 @@ const routes = [
     component: ()=>import('../views/Catalogue')
   },
   {
+    path: '/categories/:category',
+    name: 'ProductsCategory',
+    component: ()=>import('../views/ProductsCategory')
+  },
+  {
+    path: '/categories',
+    name: 'Categories',
+    component: ()=>import('../views/Categories')
+  },
+  {
     path: '/product/:id',
     name: 'Product',
     component: ()=>import('../views/Product')
@@ -46,6 +56,12 @@ const routes = [
     name: 'ProfileWrapper',
     component: ()=>import('../components/pages/profile'),
     children:[
+      {
+        path:'orders/details/:order_id',
+        name: 'UserOrderDetails',
+        component: ()=>import('../views/User/OrderDetails'),
+        props:true
+      },
       {
         path: 'orders/active',
         name: 'UserOrders',

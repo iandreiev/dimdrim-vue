@@ -32,8 +32,8 @@
                                     <unicon name="trash" />
                                     <p>Видалити</p>
                                 </div>
-                                <p class="qty">{{i.qty}} x {{i.price}} грн.</p>
-                                <p class="total">{{i.qty * i.price}} грн.</p>
+                                <p class="qty">{{i.qty}} x {{i.prices[0].price}} грн.</p>
+                                <p class="total">{{i.qty * i.prices[0].price}} грн.</p>
                             </div>
                         </div>
                     </div>

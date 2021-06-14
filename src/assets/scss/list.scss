@@ -1,0 +1,40 @@
+.list{
+    &-item{
+        display: grid;
+        grid-template-columns: 1fr 120px 100px;
+        grid-gap: $px;
+        margin: $px 0px;
+        align-items: center;
+        &-product{
+            grid-template-columns: 120px 1fr 120px 100px;
+        }
+        .label{
+            height: 40px;
+        }
+        .label, .total{
+            display: flex;
+            align-items: center;
+        }
+        .product{
+            &-image{
+                    width: 100px;
+                    height: 100px;
+                    background-size: cover;
+                    background-position: center;
+            }
+            &-meta{
+                display: flex;
+                flex-direction: column;
+                .title{
+                    font-weight: 500;
+                    font-size: 18px;
+                    margin-bottom: $px;
+                }
+                .meta{
+                    margin-bottom: $px;
+                }
+            }
+        }
+
+    }
+}

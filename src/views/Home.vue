@@ -22,41 +22,40 @@
       </SectionHeading>
     <div class="col-12">
       <div class="row">
-          <input type="text" name="search" id="search" v-model="searchQuery">
+          <input class="search-field" type="text" placeholder="Пошук серед тисячі товарів" name="search" id="search" v-model="searchQuery">
           <ButtonRegular :btnClass="'btn-accent'" @click="toSearch">Пошук</ButtonRegular>
       </div>
     </div>
        <SectionHeading>
-        <HeadingOptions :title="'Популярні категорії'" :link="'Categories'" :linkTitle="'Всі партнери'" />
+        <HeadingOptions :title="'Шукаєш новинки? У нас їх багато'" :link="'Categories'" :linkTitle="'Всі категорії'" />
     </SectionHeading>
 
-      <div class="row">
-        <swiper class="swiper" :options="swiperOption"> 
-          <swiper-slide  v-for="(i,index) in categories" :key="index">
-        <category-card :data="i" />
-          </swiper-slide>
-        </swiper>
-      </div>
+    <scroll-horizontal :settings="catOptions">
+      <CategoryCard v-for="(i,index) in categories" :key="index" :data="i"/>
+    </scroll-horizontal>
+         
 
     <SectionHeading>
       <HeadingOptions :title="'Популярні товари'" :link="'Catalogue'" :linkTitle="'Всі товари'" />
     </SectionHeading>
-    <div class="row">
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="(i,index) in products" :key="index">
-    <ProductCard :product="i" />
-        </swiper-slide>
-      </swiper>
-    </div>
+
+    <scroll-horizontal :settings="catOptions">
+      <ProductCard v-for="(i,index) in products" :key="index" :product="i" />
+    </scroll-horizontal>
+   
+   <button-regular @click="toRoute('Catalogue')" :btnClass="'btn-pillow btn-accent'">Go do this</button-regular>
+
 
    <SectionHeading>
         <HeadingOptions :title="'Наші партнери'" :link="'Partners'" :linkTitle="'Всі партнери'" />
     </SectionHeading>
     
    
-        <SectionScrollHorizontal>
+        <scroll-horizontal :settings="catOptions">
         <ImageCard :cardType="'partner'" v-for="(i,index) in partners" :key="index" :data="i" />
-    </SectionScrollHorizontal>
+    </scroll-horizontal>
+
+   <button-regular @click="toRoute('Partners')" :btnClass="'btn-pillow btn-accent'">Go do this</button-regular>
 
     
     <SectionHeading>
@@ -73,7 +72,6 @@ import Navbar from "../components/ui/Navbar"
 import Footer from "../components/ui/Footer"
 import HeadingOptions from "../components/ui/headings/header-option"
 import Input from "../components/ui/inputs/input-text"
-import ButtonRegular from "../components/ui/buttons/button-regular"
 import SectionHeading from "../components/ui/sections/heading-section"
 import SectionMain from "../components/ui/sections/main-section"
 import ProductCard from "../components/ui/cards/product-card"
@@ -81,12 +79,18 @@ import ImageCard from "../components/ui/cards/image-card"
 import SectionScrollHorizontal from "../components/ui/slider/slider-horizontal"
 import { mapState } from 'vuex'
 import CategoryCard from '../components/ui/cards/category-card.vue'
+import ScrollHorizontal from '../components/ui/scroll/scroll-horizontal.vue'
+import ButtonRegular from '../components/ui/buttons/button-regular.vue'
 
 export default {
   data(){
     return{
       products:'',
       searchQuery: '',
+      catOptions:{
+        col:12,
+        scrollbar: true
+      },
        swiperOption: {
           slidesPerView: 4,
           spaceBetween: 20,
@@ -101,6 +105,9 @@ export default {
     toSearch(){
       this.$router.push({name: 'Search', params:{query:this.searchQuery}})
       
+    },
+    toRoute(route){
+      this.$router.push({name:route})
     },
     testClick(){
       alert('clicked')
@@ -126,17 +133,19 @@ export default {
     Footer,
     HeadingOptions,
     Input,
-    ButtonRegular,
     SectionHeading,
     SectionMain,
     ProductCard,
     SectionScrollHorizontal,
     ImageCard,
-    CategoryCard
+    CategoryCard,
+    ScrollHorizontal,
+    ButtonRegular
   }
 }
 </script>
 
 <style>
+    
 
 </style>

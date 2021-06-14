@@ -5,3 +5,4 @@
 @mixin hover($color, $percent){
     background-color: darken($color, $percent);
 }
+

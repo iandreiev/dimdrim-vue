@@ -19,6 +19,7 @@ h3{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
     &-section{
         margin: abs($px*2) 0px;
@@ -29,4 +30,78 @@ h3{
     &-success{
         color: $blue-100;
     }
+    &-danger{
+        color: $red-100;
+    }
+    &-muted{
+        color: $grey-80;
+    }
+    &-strike{
+        text-decoration: line-through;
+    }
 }
+
+a{
+    color: $blue-100;
+    text-decoration: none;
+    &:hover{
+        color: transparentize($blue-100, 0.4)
+    }
+    &:active{
+        color: transparentize($blue-100, 0.3)
+    }
+}
+
+@media #{$bp-x}{
+    h1{
+        font-size: 1.60em;
+        font-weight: 500;
+    }
+    
+    h2{
+        font-size: 1.25em;
+        font-weight: 400;
+    }
+    
+    h3{
+          font-size: 1em;
+        font-weight: 400;  
+    }
+    .heading{
+        &-row{
+            padding: 0 $px;
+            .router-link{
+                display: none;
+            }
+        }
+    }   
+}
+
+@media #{$bp-regular}{
+    h1{
+        font-size: 1.60em;
+        font-weight: 500;
+    }
+    
+    h2{
+        font-size: 1.25em;
+        font-weight: 400;
+    }
+    
+    h3{
+          font-size: 1em;
+        font-weight: 400;  
+    }
+    .heading{
+        &-row{
+            // padding: 0 $px;
+            .router-link{
+                display: none;
+            }
+        }
+        &-section{
+            margin: abs($px*2) abs($px);
+        }
+    }   
+}
+

@@ -1,44 +1,92 @@
-.footer{
+.footer {
     background-color: $white;
     border-top: 1px solid $grey;
-    padding: abs($px*4) 0px;
-    margin-top: abs($px*4);
-    &-logo{
+    padding: abs($px * 4) 0px;
+    margin-top: abs($px * 4);
+    &-logo {
         background-image: $logo-regular;
         height: 28px;
         width: 123px;
         background-size: cover;
         background-repeat: no-repeat;
     }
-    &-list{
-        &-header{
+    &-list {
+        &-header {
             font-size: 1.4em;
             font-weight: 600;
             color: $dark;
         }
-        &-wrapper{
+        &-wrapper {
             list-style: none;
-            margin-top: abs($px*3);
+            margin-top: abs($px * 3);
         }
-        &-item{
-            margin: abs($px*2) 0px;
+        &-item {
+            margin: abs($px * 2) 0px;
             font-size: 1.2em;
             font-weight: 400;
             cursor: pointer;
-            &-icon{
+            &-icon {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                margin: abs($px*2) 0px;
+                margin: abs($px * 2) 0px;
                 font-size: 1.2em;
                 font-weight: 400;
                 cursor: pointer;
-                .unicon{
+                .unicon {
                     fill: $dark;
                     margin-right: $px;
                 }
             }
         }
+    }
+}
 
+@media #{$bp-regular} {
+    .footer {
+        &-logo{
+            margin: 0 auto;
+        }
+        &-list {
+            &-item{
+                margin: $px 0px;
+            }
+            &-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .container {
+            .row {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
+@media #{$bp-x} {
+    .footer {
+        &-logo{
+            margin: 0 auto;
+        }
+        &-list {
+            &-item{
+                margin: $px 0px;
+            }
+            &-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .container {
+            .row {
+                display: flex;
+                flex-direction: column;
+            }
+        }
     }
 }
