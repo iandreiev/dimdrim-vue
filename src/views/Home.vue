@@ -3,13 +3,13 @@
     <Navbar />
       <SectionMain>
         <SectionHeading>
-        <HeadingOptions :title="'Ласкаво просимо в DIMDRIM'" />
+        <HeadingOptions :title="$t('welcomeText')" />
       </SectionHeading>
       <div class="slide slide-test">
         <div class="row">
           <div class="col-6 slide-helper">
-        <h1>Знайди своє серед тисячі товарів!<br>DIMDRIM працює для тебе</h1>
-          <ButtonRegular :btnClass="'btn-white'" @click="toSearch">Дізнатись більше</ButtonRegular>
+        <h1 v-html="$t('lookUpYour')"></h1>
+          <ButtonRegular :btnClass="'btn-white'" @click="toSearch">{{$t('btnMore')}}</ButtonRegular>
          
           </div>
           <div class="col-6 slide-img">
@@ -18,16 +18,16 @@
         </div>
       </div>
       <SectionHeading>
-    <HeadingOptions :title="'Пошук товарів'" />
+    <HeadingOptions :title="$t('searchTitle')" />
       </SectionHeading>
     <div class="col-12">
       <div class="row">
-          <input class="search-field" type="text" placeholder="Пошук серед тисячі товарів" name="search" id="search" v-model="searchQuery">
-          <ButtonRegular :btnClass="'btn-accent'" @click="toSearch">Пошук</ButtonRegular>
+          <input class="search-field" type="text" :placeholder="$t('searchText')" name="search" id="search" v-model="searchQuery">
+          <ButtonRegular :btnClass="'btn-accent'" @click="toSearch">{{$t('searchBtn')}}</ButtonRegular>
       </div>
     </div>
        <SectionHeading>
-        <HeadingOptions :title="'Шукаєш новинки? У нас їх багато'" :link="'Categories'" :linkTitle="'Всі категорії'" />
+        <HeadingOptions :title="$t('cats.title')" :link="'Categories'" :linkTitle="$t('cats.link')" />
     </SectionHeading>
 
     <scroll-horizontal :settings="catOptions">
@@ -36,18 +36,18 @@
          
 
     <SectionHeading>
-      <HeadingOptions :title="'Популярні товари'" :link="'Catalogue'" :linkTitle="'Всі товари'" />
+      <HeadingOptions :title="$t('goods.title')" :link="'Catalogue'" :linkTitle="$t('goods.link')" />
     </SectionHeading>
 
     <scroll-horizontal :settings="catOptions">
       <ProductCard v-for="(i,index) in products" :key="index" :product="i" />
     </scroll-horizontal>
    
-   <button-regular @click="toRoute('Catalogue')" :btnClass="'btn-pillow btn-accent'">Go do this</button-regular>
+   <button-regular @click="toRoute('Catalogue')" :btnClass="'btn-pillow btn-accent'">{{$t('goods.link')}}</button-regular>
 
 
    <SectionHeading>
-        <HeadingOptions :title="'Наші партнери'" :link="'Partners'" :linkTitle="'Всі партнери'" />
+        <HeadingOptions :title="$t('partners.title')" :link="'Partners'" :linkTitle="$t('partners.link')" />
     </SectionHeading>
     
    
@@ -55,13 +55,13 @@
         <ImageCard :cardType="'partner'" v-for="(i,index) in partners" :key="index" :data="i" />
     </scroll-horizontal>
 
-   <button-regular @click="toRoute('Partners')" :btnClass="'btn-pillow btn-accent'">Go do this</button-regular>
+   <button-regular @click="toRoute('Partners')" :btnClass="'btn-pillow btn-accent'">{{$t('partners.link')}}</button-regular>
 
     
-    <SectionHeading>
+    <!-- <SectionHeading>
         <HeadingOptions :title="'Сервіс'" :link="'Service'" :linkTitle="'Всі послуги'" />
-    </SectionHeading>
-      </SectionMain>
+    </SectionHeading> -->
+      </SectionMain> 
 
     <Footer />
   </div>

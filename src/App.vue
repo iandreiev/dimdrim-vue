@@ -5,12 +5,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import GetLocation from "./store/getLocation"
 
 export default {
   data(){
     return{
     }
+  },
+  computed:{
+    ...mapState(["activeLang"])
   },
   methods:{
     getCats(){
@@ -30,12 +34,17 @@ export default {
 
       this.$http(options)
       .then(res=>this.$store.commit('SET_PARTNERS', res.data))
+    },
+    initLanguages(){
+      this.$i18n.locale = this.activeLang.value
+      console.log(this.$i18n.locale)
     }
   },
   created(){
     this.getCats()
     this.getPartners()
     GetLocation.getLocationAPI()
+    this.initLanguages()
   },
 }
 </script>

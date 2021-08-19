@@ -22,7 +22,9 @@
                   </ul>
               </nav>
               <div class="header-actions">
-
+                  <div v-click-outside="closeLangDrop"  class="header-actions--item" @click="openLang()">
+                      <div class="flag" :class="`flag-${activeLang.icon}`"></div>
+                  </div>
                 <div class="header-actions--item" @click="showCart">
                     <unicon name="shopping-cart" />
 
@@ -36,8 +38,13 @@
               </div>
             </div>
           </div>
+                <div class="lang-popup" :class="{'lang-popup-active':langVisible == true}">
+                    <div class="lang-item" @click="changeLang(i)" v-for="(i,index) in langs" :key="index">
+                        <div class="flag" :class="`flag-${i.icon}`"></div>
+                        <div class="lang-">{{i.title}}</div>
+                    </div>
+                </div>
               <cart />
-
               <favs />
       </header>
 </template>
@@ -50,6 +57,7 @@ import Favs from '../favs.vue'
 export default {
     data(){
         return{
+            langVisible: false,
             items:[
                 {
                     name: "Контакти"
@@ -64,10 +72,38 @@ export default {
                     name: "Доставка і оплата"
                 },
 
+            ],
+            langs:[
+                {
+                    title: 'Русский',
+                    value: 'ru',
+                    icon:'ru'
+                },
+                {
+                    title: 'English',
+                    value: 'en',
+                    icon:'uk'
+                },
+                {
+                    title: 'Українська',
+                    value: 'ua',
+                    icon:'ua'
+                }
             ]
         }
     },
     methods:{
+        openLang(){
+            this.langVisible = true
+        },
+        closeLangDrop(){
+            this.langVisible = false
+        },
+        changeLang(item){
+            this.$store.commit('SET_LANG', item)
+            this.$i18n.locale = item.value
+            this.langVisible = false
+        },
         toHome(){
             this.$router.push({name:'Home'})
         },
@@ -89,7 +125,7 @@ export default {
         }
     },
     computed:{
-        ...mapState(["cartShow", "favsShow","auth"])
+        ...mapState(["cartShow", "favsShow","auth", "activeLang"])
     },
     components:{
         Cart,

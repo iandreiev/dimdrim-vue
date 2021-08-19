@@ -1,0 +1,30 @@
+{
+  "btnMore": "Get more",
+  "lookUpYour":"Search goods for yourself<br>DIMDRIM working for you",
+  "welcomeText":"Welcome to the DIMDRIM",
+  "searchText":"Search in thousands of goods",
+  "searchTitle":"Search goods",
+  "searchBtn":"Search",
+  "cats":{
+    "title":"Looking for newcomings? We have it more!",
+    "link":"All categories"
+  },
+  "goods":{
+    "title":"Popular goods",
+    "link":"All goods"
+  },
+  "partners":{
+    "title":"Partners",
+    "link":"All partners"
+  },
+  "cart":{
+    "title":"Cart",
+    "empty":"Your cart currently empty",
+    "createOrder":"Create order"
+  },
+  "favs":{
+    "title":"Favorites",
+    "empty":"Your favs is currently empty",
+    "addToCart":"Add to cart"
+  }
+}

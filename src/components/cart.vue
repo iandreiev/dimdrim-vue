@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="closeCart" class="cart-popup cart-popup-cart" :class="{'cart-popup-active':cartShow==true}" v-if="cartShow == true">
       <div class="cart-header">
-          <h3>Кошик</h3>
+          <h3>{{$t('cart.title')}}</h3>
           <div class="cart-close" @click="closeCart()">
               <unicon name="times" />
               </div> 
@@ -10,7 +10,7 @@
           <div class="empty-state">
               <unicon name="shopping-cart" width="50" height="50" />
           </div>
-          <h3>Кошик пустий</h3>
+          <h3>{{$t('cart.empty')}}</h3>
       </div>
       <div class="cart-items" v-show="cart.length > 0">
           <div class="cart-item" v-for="(i,index) in cart" :key="index">
@@ -29,7 +29,7 @@
           </div>
       </div>
       <div class="cart-checkout" v-show="cart.length > 0">
-          <button-regular @click="toOrder" :btnClass="'btn-success btn-block'" >Оформити замовлення</button-regular>
+          <button-regular @click="toOrder" :btnClass="'btn-success btn-block'" >{{$t('cart.createOrder')}}</button-regular>
       </div>
   </div>
 </template>

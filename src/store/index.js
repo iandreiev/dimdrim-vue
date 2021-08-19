@@ -9,7 +9,7 @@ Vue.use(VueAxios, axios);
 
 const PORT = 5050
 const mode = 'dev' // can be 'product'
-const IP = "192.168.88.37"
+const IP = "192.168.1.161"
 
 let url = mode == 'dev' ? `http://${IP}:${PORT}/api` : ''
 
@@ -23,6 +23,10 @@ let favsCount = window.localStorage.getItem('favsCount');
 
 export default new Vuex.Store({
   state: {
+    activeLang:{
+      icon: 'ua',
+      value: 'ua'
+    },
     orders: [],
     categories:[],
     order_history:[],
@@ -55,6 +59,12 @@ export default new Vuex.Store({
       state.user = {},
       state.auth = false,
       state.notifications = []
+    },
+    SET_LANG:(state,lang) => {
+      state.activeLang = {
+        icon: lang.icon,
+        value: lang.value
+      }
     },
     SET_USER_NOTIFICATIONS:(state,notifications)=>{
       state.notifications = notifications

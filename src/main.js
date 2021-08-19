@@ -4,6 +4,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vClickOutside from 'v-click-outside'
+import VueI18n from 'vue-i18n'
 
 // import functions from './store/functions'
 import './assets/scss/common.scss'
@@ -16,14 +17,20 @@ Vue.use(Notifications)
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
+import i18n from './i18n'
 Vue.use(VueAwesomeSwiper)
 Vue.use(vClickOutside)
+Vue.use(VueI18n)
+
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
+
   // functions,
   store,
+
+  i18n,
   render: h => h(App)
 }).$mount('#app')

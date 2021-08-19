@@ -1,7 +1,7 @@
 <template>
   <div v-click-outside="closeFavs"  class="cart-popup cart-popup-favs" :class="{'cart-popup-active':favsShow==true}" v-if="favsShow == true">
       <div class="cart-header">
-          <h3>Улюблені</h3>
+          <h3>{{$t('favs.title')}}</h3>
           <div class="cart-close" @click="closeFavs()">
               <unicon name="times" />
               </div> 
@@ -10,7 +10,7 @@
           <div class="empty-state">
               <unicon name="heart" width="50" height="50" />
           </div>
-          <h3>Улюблені товари відсутні</h3>
+          <h3>{{$t('favs.empty')}}</h3>
       </div>
       <div class="cart-items" v-show="favs.length > 0">
           <div class="cart-item" v-for="(i,index) in favs" :key="index">
@@ -27,7 +27,7 @@
                 <div class="cart-actions">
                      <div class="cart-add">
                  <unicon name="shopping-cart" />
-                 <p>В кошик</p>
+                 <p>{{$t('favs.addToCart')}}</p>
              </div>
               <div class="cart-remove" @click="removeFromFavs(i)">
                   <unicon name="trash" />
